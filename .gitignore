@@ -1,6 +1,6 @@
 .git
 .idea
-environments/dev/.terraform
-environments/dev/.terraform.lock.hcl
+.terraform
+.terraform.lock.hcl
 *.tfstate
 *.tfstate.backup

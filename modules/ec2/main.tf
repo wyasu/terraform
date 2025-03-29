@@ -12,8 +12,12 @@ resource "aws_instance" "this" {
   }
 }
 
+resource "random_id" "this" {
+  byte_length = 8
+}
+
 resource "aws_security_group" "this" {
-  name = "udemy-terraform-ec2-sg"
+  name = "udemy-terraform-ec2-sg-${random_id.this.hex}"
 }
 
 resource "aws_security_group_rule" "ssh" {
