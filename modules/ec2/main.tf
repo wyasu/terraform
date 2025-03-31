@@ -37,15 +37,6 @@ resource "aws_security_group_rule" "ssh" {
   type              = "ingress"
 }
 
-resource "aws_security_group_rule" "http" {
-  from_port         = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.this.id
-  to_port           = 80
-  type              = "ingress"
-}
-
 resource "aws_security_group_rule" "egress" {
   from_port         = 0
   protocol          = "-1"
