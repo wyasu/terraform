@@ -2,7 +2,9 @@ resource "aws_instance" "this" {
   ami           = "ami-026c39f4021df9abe"
   instance_type = "t2.micro"
 
+  subnet_id = var.subnet_id
   vpc_security_group_ids = [aws_security_group.this.id]
+  associate_public_ip_address = true
 
   user_data = file("${path.module}/user_data.sh")
   user_data_replace_on_change = true
@@ -16,7 +18,12 @@ resource "random_id" "this" {
   byte_length = 8
 }
 
+data "aws_subnet" "this" {
+  id = var.subnet_id
+}
+
 resource "aws_security_group" "this" {
+  vpc_id = data.aws_subnet.this.vpc_id
   name = "udemy-terraform-ec2-sg-${random_id.this.hex}"
 }
 
